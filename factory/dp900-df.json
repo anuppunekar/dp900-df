@@ -1,0 +1,9 @@
+{
+	"name": "dp900-df",
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "be5e6d54-1a18-42ba-8f1b-25fb5f715185",
+		"tenantId": "53e39d05-05e8-410b-b436-141031284797"
+	}
+}
