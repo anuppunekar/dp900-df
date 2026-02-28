@@ -24,6 +24,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "Product"
+				},
+				{
+					"dataset": {
+						"referenceName": "SalesLT_ProductSubCategory",
+						"type": "DatasetReference"
+					},
+					"name": "ProductSubCategory"
 				}
 			],
 			"sinks": [],
@@ -69,7 +76,17 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> Product"
+				"     ignoreNoFilesFound: false) ~> Product",
+				"source(output(",
+				"          ProductCategoryID as string,",
+				"          ParentProductCategoryID as string,",
+				"          Name as string,",
+				"          rowguid as string,",
+				"          ModifiedDate as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> ProductSubCategory"
 			]
 		}
 	}
