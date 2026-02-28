@@ -1,0 +1,65 @@
+D:\stsProjects\dp900-df>echo "# dp900-df" >> README.md
+
+D:\stsProjects\dp900-df>git init
+Initialized empty Git repository in D:/stsProjects/dp900-df/.git/
+
+D:\stsProjects\dp900-df>git add README.md
+
+D:\stsProjects\dp900-df>git branch -M dev2603
+error: refname refs/heads/master not found
+fatal: Branch rename failed
+
+D:\stsProjects\dp900-df>git branch
+
+D:\stsProjects\dp900-df>git commit -m "Created"
+[master (root-commit) 7df3ef2] Created
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+
+D:\stsProjects\dp900-df>git remote add origin https://github.com/anuppunekar/dp900-df
+
+D:\stsProjects\dp900-df>git remote
+origin
+
+D:\stsProjects\dp900-df>git branch
+* master
+
+D:\stsProjects\dp900-df>git branch dev2603
+
+D:\stsProjects\dp900-df>git branch
+  dev2603
+* master
+
+D:\stsProjects\dp900-df>git checkout dev2603
+Switched to branch 'dev2603'
+
+D:\stsProjects\dp900-df>git branch
+* dev2603
+  master
+
+D:\stsProjects\dp900-df>git status
+On branch dev2603
+nothing to commit, working directory clean
+
+D:\stsProjects\dp900-df>git add README.md
+
+D:\stsProjects\dp900-df>git status
+On branch dev2603
+nothing to commit, working directory clean
+
+D:\stsProjects\dp900-df>git push -u origin dev2603
+Username for 'https://github.com': anuppunekar
+Password for 'https://anuppunekar@github.com':
+Counting objects: 3, done.
+Writing objects: 100% (3/3), 224 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+remote: To https://github.com/anuppunekar/dp900-df
+ * [new branch]      dev2603 -> dev2603
+Branch dev2603 set up to track remote branch dev2603 from origin.
+
+D:\stsProjects\dp900-df>git status
+On branch dev2603
+Your branch is up-to-date with 'origin/dev2603'.
+nothing to commit, working directory clean
+
+D:\stsProjects\dp900-df>
