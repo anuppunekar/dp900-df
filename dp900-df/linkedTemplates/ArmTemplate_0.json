@@ -689,6 +689,7 @@
 						"     truncate: true,",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true,",
+						"     saveOrder: 1,",
 						"     partitionBy('hash', 1)) ~> csvProductsInfo"
 					]
 				}
