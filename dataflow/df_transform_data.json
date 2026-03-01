@@ -47,10 +47,25 @@
 					"name": "csvProductModel"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "csvSalesLT_ProductInfo",
+						"type": "DatasetReference"
+					},
+					"name": "csvProductsInfo",
+					"rejectedDataLinkedService": {
+						"referenceName": "csvSalesLT_ProductErrorInfo",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
 			"transformations": [
 				{
 					"name": "csvProductModelcsvProduct"
+				},
+				{
+					"name": "SelectAndRenameColumns"
 				}
 			],
 			"scriptLines": [
@@ -140,7 +155,40 @@
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> csvProductModelcsvProduct"
+				"     broadcast: 'auto')~> csvProductModelcsvProduct",
+				"csvProductModelcsvProduct select(mapColumn(",
+				"          ProductID,",
+				"          Name = csvProduct@Name,",
+				"          ProductNumber,",
+				"          Color,",
+				"          StandardCost,",
+				"          ListPrice,",
+				"          Size,",
+				"          Weight,",
+				"          ProductModelID = csvProduct@ProductModelID,",
+				"          ProductModelName = csvProductModel@Name",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SelectAndRenameColumns",
+				"SelectAndRenameColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          ProductID as string,",
+				"          Name as string,",
+				"          ProductNumber as string,",
+				"          Color as string,",
+				"          StandardCost as string,",
+				"          ListPrice as string,",
+				"          Size as string,",
+				"          Weight as string,",
+				"          ProductModelID as string,",
+				"          ProductModelName as string",
+				"     ),",
+				"     partitionFileNames:['SalesLT_ProductInfo.csv'],",
+				"     truncate: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> csvProductsInfo"
 			]
 		}
 	}
