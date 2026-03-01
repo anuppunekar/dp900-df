@@ -31,14 +31,17 @@
 						"type": "DatasetReference"
 					},
 					"name": "ProductSubCategory"
+				},
+				{
+					"dataset": {
+						"referenceName": "csvSalesLT_Product",
+						"type": "DatasetReference"
+					},
+					"name": "csvProduct"
 				}
 			],
 			"sinks": [],
-			"transformations": [
-				{
-					"name": "ProductSubCategoryProduct"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(output(",
 				"          ProductModelID as string,",
@@ -91,11 +94,28 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> ProductSubCategory",
-				"ProductSubCategory, Product join(ParentProductCategoryID == ProductID,",
-				"     joinType:'inner',",
-				"     matchType:'exact',",
-				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> ProductSubCategoryProduct"
+				"source(output(",
+				"          ProductID as string,",
+				"          Name as string,",
+				"          ProductNumber as string,",
+				"          Color as string,",
+				"          StandardCost as string,",
+				"          ListPrice as string,",
+				"          Size as string,",
+				"          Weight as string,",
+				"          ProductCategoryID as string,",
+				"          ProductModelID as string,",
+				"          SellStartDate as string,",
+				"          SellEndDate as string,",
+				"          DiscontinuedDate as string,",
+				"          ThumbNailPhoto as string,",
+				"          ThumbnailPhotoFileName as string,",
+				"          rowguid as string,",
+				"          ModifiedDate as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> csvProduct"
 			]
 		}
 	}
