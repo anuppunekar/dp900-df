@@ -38,6 +38,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "csvProduct"
+				},
+				{
+					"dataset": {
+						"referenceName": "csvSalesLT_ProductModel",
+						"type": "DatasetReference"
+					},
+					"name": "csvProductModel"
 				}
 			],
 			"sinks": [],
@@ -115,7 +122,16 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> csvProduct"
+				"     ignoreNoFilesFound: false) ~> csvProduct",
+				"source(output(",
+				"          ProductModelID as string,",
+				"          Name as string,",
+				"          rowguid as string,",
+				"          ModifiedDate as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> csvProductModel"
 			]
 		}
 	}
