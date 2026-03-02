@@ -13,24 +13,10 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "SalesLT_ProductCategory",
-						"type": "DatasetReference"
-					},
-					"name": "ProductCategory"
-				},
-				{
-					"dataset": {
 						"referenceName": "SalesLT_Product",
 						"type": "DatasetReference"
 					},
 					"name": "Product"
-				},
-				{
-					"dataset": {
-						"referenceName": "SalesLT_ProductSubCategory",
-						"type": "DatasetReference"
-					},
-					"name": "ProductSubCategory"
 				},
 				{
 					"dataset": {
@@ -79,16 +65,6 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> ProductModel",
 				"source(output(",
-				"          ProductCategoryID as string,",
-				"          ParentProductCategoryID as string,",
-				"          Name as string,",
-				"          rowguid as string,",
-				"          ModifiedDate as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> ProductCategory",
-				"source(output(",
 				"          ProductID as string,",
 				"          Name as string,",
 				"          ProductNumber as string,",
@@ -110,16 +86,6 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> Product",
-				"source(output(",
-				"          ProductCategoryID as string,",
-				"          ParentProductCategoryID as string,",
-				"          Name as string,",
-				"          rowguid as string,",
-				"          ModifiedDate as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> ProductSubCategory",
 				"source(output(",
 				"          ProductID as string,",
 				"          Name as string,",
