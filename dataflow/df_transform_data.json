@@ -185,7 +185,6 @@
 				"          ProductModelName as string",
 				"     ),",
 				"     partitionFileNames:['SalesLT_ProductInfo.csv'],",
-				"     truncate: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     saveOrder: 1,",
