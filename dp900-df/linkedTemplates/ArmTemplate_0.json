@@ -514,24 +514,10 @@
 						},
 						{
 							"dataset": {
-								"referenceName": "SalesLT_ProductCategory",
-								"type": "DatasetReference"
-							},
-							"name": "ProductCategory"
-						},
-						{
-							"dataset": {
 								"referenceName": "SalesLT_Product",
 								"type": "DatasetReference"
 							},
 							"name": "Product"
-						},
-						{
-							"dataset": {
-								"referenceName": "SalesLT_ProductSubCategory",
-								"type": "DatasetReference"
-							},
-							"name": "ProductSubCategory"
 						},
 						{
 							"dataset": {
@@ -580,16 +566,6 @@
 						"     validateSchema: false,",
 						"     ignoreNoFilesFound: false) ~> ProductModel",
 						"source(output(",
-						"          ProductCategoryID as string,",
-						"          ParentProductCategoryID as string,",
-						"          Name as string,",
-						"          rowguid as string,",
-						"          ModifiedDate as string",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false) ~> ProductCategory",
-						"source(output(",
 						"          ProductID as string,",
 						"          Name as string,",
 						"          ProductNumber as string,",
@@ -611,16 +587,6 @@
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     ignoreNoFilesFound: false) ~> Product",
-						"source(output(",
-						"          ProductCategoryID as string,",
-						"          ParentProductCategoryID as string,",
-						"          Name as string,",
-						"          rowguid as string,",
-						"          ModifiedDate as string",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false) ~> ProductSubCategory",
 						"source(output(",
 						"          ProductID as string,",
 						"          Name as string,",
@@ -686,7 +652,6 @@
 						"          ProductModelName as string",
 						"     ),",
 						"     partitionFileNames:['SalesLT_ProductInfo.csv'],",
-						"     truncate: true,",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true,",
 						"     saveOrder: 1,",
@@ -696,13 +661,60 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SalesLT_ProductModel')]",
-				"[concat(variables('factoryId'), '/datasets/SalesLT_ProductCategory')]",
 				"[concat(variables('factoryId'), '/datasets/SalesLT_Product')]",
-				"[concat(variables('factoryId'), '/datasets/SalesLT_ProductSubCategory')]",
 				"[concat(variables('factoryId'), '/datasets/csvSalesLT_Product')]",
 				"[concat(variables('factoryId'), '/datasets/csvSalesLT_ProductModel')]",
 				"[concat(variables('factoryId'), '/datasets/csvSalesLT_ProductInfo')]",
 				"[concat(variables('factoryId'), '/linkedServices/csvSalesLT_ProductErrorInfo')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/plTransformData')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "TransformProductData",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "df_transform_data",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"ProductModel": {},
+									"Product": {},
+									"csvProduct": {},
+									"csvProductModel": {},
+									"csvProductsInfo": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/df_transform_data')]"
 			]
 		}
 	]
