@@ -151,8 +151,10 @@
 				"          ProductModelName as string",
 				"     ),",
 				"     partitionFileNames:['SalesLT_ProductInfo.csv'],",
+				"     truncate: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
+				"     quoteAll: true,",
 				"     saveOrder: 1,",
 				"     partitionBy('hash', 1)) ~> csvProductsInfo"
 			]

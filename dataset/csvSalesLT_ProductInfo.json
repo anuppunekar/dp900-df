@@ -2,7 +2,7 @@
 	"name": "csvSalesLT_ProductInfo",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "SalesLT_ProductModel",
+			"referenceName": "csvSalesLT_ProductInfo",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "SalesLT_ProductInfo.csv",
-				"container": "dp900df"
+				"container": "dp900sa"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
